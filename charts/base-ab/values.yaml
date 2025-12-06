@@ -1,3 +1,7 @@
+global:
+  appVersion: ""
+  imgPath: ""
+
 microservice:
   name: "microservice"
   replicas: 0
