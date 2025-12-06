@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: {{ .Values.microservice.name }}
   labels:
-    app: nginx
+    app: {{ .Values.microservice.name }} #l
 spec:
   replicas: {{ .Values.microservice.replicas }}
   selector:
     matchLabels:
-      app: nginx
+      app: {{ .Values.microservice.name }}#l
   template:
     metadata:
       labels:
-        app: nginx
+        app: {{ .Values.microservice.name }}#l
     spec:
       containers:
-        - name: nginx
+        - name: {{ .Values.microservice.name }}#l
           image: nginx:1.14.2
           ports:
             - containerPort: 80
