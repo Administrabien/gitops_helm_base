@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: {{ .Values.microservice.name }}#l
-          image: nginx:1.14.2
+          image:  {{ .Values.imagePath }}:{{ .Values.appVersion }}
           ports:
             - containerPort: 80
