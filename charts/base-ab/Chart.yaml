@@ -1,0 +1,31 @@
+apiVersion: v2
+name: base-ab
+description: Chart para crear todo lo de k8s referente a los microservicios
+type: application
+
+# Esta es la versión DEL CHART (la plantilla en sí)
+# Cada vez que modifiques un .yaml dentro de templates/, debes subir esto (0.1.0 -> 0.1.1)
+version: 0.1.0
+
+# Esta es la versión DE LA APP por defecto (ej. la versión de Nginx o de tu Java app)
+# Es informativo, pero útil para saber qué versión de software despliega por defecto.
+# IMPORTANTE: Siempre entre comillas para evitar que se interprete como número.
+appVersion: "1.0.0"
+
+# Opcional: Palabras clave para buscar el chart en repositorios
+keywords:
+  - microservice
+  - java
+  - nodejs
+  - base
+
+# Opcional: Quién mantiene esto
+maintainers:
+  - name: Fran
+    email: fcovillegast@gmail.com
+
+# Opcional: Si tu chart base depende de otros charts (ej. Redis o Postgres)
+# dependencies:
+#   - name: redis
+#     version: 17.3.2
+#     repository: https://charts.bitnami.com/bitnami
