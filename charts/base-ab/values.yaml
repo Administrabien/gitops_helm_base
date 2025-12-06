@@ -1,3 +1,3 @@
 microservice:
   name: "microservice"
-  replicas:
+  replicas: 0
