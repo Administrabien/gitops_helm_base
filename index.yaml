@@ -3,6 +3,24 @@ entries:
   base-ab:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-12-06T18:26:26.027464038Z"
+    description: Chart para crear todo lo de k8s referente a los microservicios
+    digest: 1351f951abf7be79105fb8a5f491547218351ffb04d24887bcae9d55f8bfca34
+    keywords:
+    - microservice
+    - java
+    - nodejs
+    - base
+    maintainers:
+    - email: fcovillegast@gmail.com
+      name: Francisco
+    name: base-ab
+    type: application
+    urls:
+    - https://github.com/Administrabien/gitops_helm_base/releases/download/base-ab-0.1.5/base-ab-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-12-06T18:21:33.653075805Z"
     description: Chart para crear todo lo de k8s referente a los microservicios
     digest: 7ea5bd4241c863528fb1e9352e6196ffba90db57c3600d018da382ce285d4f50
@@ -37,4 +55,4 @@ entries:
     urls:
     - https://github.com/Administrabien/gitops_helm_base/releases/download/base-ab-0.1.3/base-ab-0.1.3.tgz
     version: 0.1.3
-generated: "2025-12-06T18:21:33.6530837Z"
+generated: "2025-12-06T18:26:26.027476501Z"
