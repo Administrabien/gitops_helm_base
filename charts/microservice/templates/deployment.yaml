@@ -18,5 +18,16 @@ spec:
       containers:
         - name: "{{ .Values.microservice.name }}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
+          imagePullPolicy: {{ .Values.microservice.container.image.pullPolicy }}
           ports:
-            - containerPort: 80
+            - name: {{ .Values.microservice.container.name }}
+              containerPort: {{ .Values.microservice.container.port }}
+              protocol: {{ .Values.microservice.container.protocol }}
+          env:
+            {{- range $key, $val := .Values.microservice.container.envs }}
+            - name: "{{ $key }}"
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .Values.microservice.name }}-secret"
+                  key: "{{ $key }}"
+            {{- end }}
