@@ -28,6 +28,6 @@ spec:
           - name: "{{ $key }}"
             valueFrom:
               secretKeyRef:
-                name: "hello-world-secret"
+                name: "{{ .Values.microservice.name }}-secret"
                 key: "{{ $key }}"
           {{- end }}

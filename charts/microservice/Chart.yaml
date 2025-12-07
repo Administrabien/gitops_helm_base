@@ -6,7 +6,7 @@ type: application
 # Esta es la versión DEL CHART (la plantilla en sí)
 # Cada vez que modifiques un .yaml dentro de templates/, debes subir esto (0.1.0 -> 0.1.1)
 #IMPORTANTE: release (0.0.x) number no puede ser mayor a 9
-version: 0.2.7
+version: 0.2.8
 
 # Esta es la versión DE LA APP por defecto (ej. la versión de Nginx o de tu Java app)
 # Es informativo, pero útil para saber qué versión de software despliega por defecto.
