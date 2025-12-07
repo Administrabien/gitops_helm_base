@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   name: {{ .Values.microservice.name }}
   labels:
-    app: {{ printf "%-label" .Values.microservice.name }} #l
+    app: "{{ .Values.microservice.name }}}-label" #l
 spec:
   replicas: {{ .Values.microservice.replicas }}
   selector:
     matchLabels:
-      app: {{ printf "%-label" .Values.microservice.name }} #l
+      app: "{{ .Values.microservice.name }}}-label" #l
   template:
     metadata:
       labels:
-        app: {{ printf "%-label" .Values.microservice.name }} #l
+        app: "{{ .Values.microservice.name }}}-label" #l
     spec:
       containers:
-        - name: {{ printf "%-label" .Values.microservice.name }} #l
+        - name: "{{ .Values.microservice.name }}}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
           ports:
             - containerPort: 80
