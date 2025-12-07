@@ -6,7 +6,7 @@ metadata:
   labels:
     app: "{{ .Values.microservice.name }}-label" #l
 spec:
-  replicas: {{ .Values.microservice.replica }}
+  replicas: {{ .Values.microservice.replicas }}
   selector:
     matchLabels:
       app: "{{ .Values.microservice.name }}-label" #l
