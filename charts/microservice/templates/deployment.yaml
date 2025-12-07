@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.microservice.name }}
+  namespace: {{ .Values.microservice.name }}
+  name: "{{ .Values.microservice.name }}-deployment"
   labels:
     app: "{{ .Values.microservice.name }}-label" #l
 spec:
