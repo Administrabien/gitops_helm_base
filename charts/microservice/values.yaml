@@ -3,8 +3,8 @@ global:
   imgPath: ""
 
 microservice:
-  name: "microservice"
-  replicas: 0
+  name:
+  replicas:
 
   serviceMetaData:
     cluster:
