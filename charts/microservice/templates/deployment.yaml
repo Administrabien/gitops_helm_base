@@ -24,10 +24,10 @@ spec:
               containerPort: {{ .Values.microservice.container.port }}
               protocol: {{ .Values.microservice.container.protocol }}
           env:
-            {{- range $key, $val := .Values.microservice.container.envs }}
-            - name: "{{ $key }}"
-              valueFrom:
-                secretKeyRef:
-                  name: "{{ .Values.microservice.name }}-secret"
-                  key: "{{ $key }}"
-            {{- end }}
+          {{- range $key, $val := .Values.microservice.container.envs }}
+          - name: "{{ $key }}"
+            valueFrom:
+              secretKeyRef:
+                name: "hello-world-secret"
+                key: "{{ $key }}"
+          {{- end }}
