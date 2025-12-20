@@ -1,14 +1,13 @@
-global:
-  appVersion: ""
-  imgPath: ""
-
 microservice:
-  name:
-  replicas:
+  global:
+    appVersion: ""
+    imgPath: ""
+  name: ""
+  replicas: 0
 
   serviceMetaData:
-    cluster:
-    service_name:
+    cluster: ""
+    service_name: ""
 
   container:
     port: 8080
@@ -48,7 +47,7 @@ microservice:
       TZ: America/Santiago
       MANAGEMENT_CONTENT_PATH: actuator
 
-    autoescaling:
+    autoscaling:
       enabled: true
       version: "autoscaling/v2"
       minReplicas: 1
