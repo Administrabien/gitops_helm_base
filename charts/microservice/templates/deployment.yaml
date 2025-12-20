@@ -31,3 +31,21 @@ spec:
                 name: "{{ $.Values.global.ms.name }}-secret"
                 key: "{{ $key }}"
           {{- end }}
+          {{- if .Values.global.ms.container.livenessProbe }}
+          livenessProbe:
+            {{- range $key, $value := .Values.global.ms.container.livenessProbe }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+          {{- end}}
+          {{- if .Values.global.ms.container.readinessProbe }}
+          readinessProbe:
+            {{- range $key, $value := .Values.global.ms.container.readinessProbe }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+          {{- end}}
+          {{- if .Values.global.ms.container.startupProbe }}
+          startupProbe:
+            {{- range $key, $value := .Values.global.ms.container.startupProbe }}
+            {{ $key }}: {{ $value }}
+            {{- end }}
+          {{- end}}
