@@ -1,7 +1,9 @@
+global:
+  appVersion: ""
+  imgPath: ""
+
+
 ms:
-  global:
-    appVersion: ""
-    imgPath: ""
   name: ""
   replicas: 0
 

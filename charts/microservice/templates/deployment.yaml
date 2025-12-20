@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: "{{ .Values.ms.name }}-label" #l
-          image:  {{ .Values.ms.global.imgPath }}:{{ .Values.ms.global.appVersion }}
+          image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
           imagePullPolicy: {{ .Values.ms.container.image.pullPolicy }}
           ports:
             - name: {{ .Values.ms.container.name }}
