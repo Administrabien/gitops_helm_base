@@ -1,7 +1,8 @@
-microservice:
-  global:
-    appVersion: ""
-    imgPath: ""
+global:
+  appVersion: ""
+  imgPath: ""
+
+ms:
   name: ""
   replicas: 0
 
