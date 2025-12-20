@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.ms.name }}
-  name: "{{ .Values.ms.name }}-deployment"
+  namespace: {{ .Values.global.ms.name }}
+  name: "{{ .Values.global.ms.name }}-deployment"
   labels:
-    app: "{{ .Values.ms.name }}-label" #l
+    app: "{{ .Values.global.ms.name }}-label" #l
 spec:
-  replicas: {{ .Values.ms.replicas }}
+  replicas: {{ .Values.global.ms.replicas }}
   selector:
     matchLabels:
-      app: "{{ .Values.ms.name }}-label" #l
+      app: "{{ .Values.global.ms.name }}-label" #l
   template:
     metadata:
       labels:
-        app: "{{ .Values.ms.name }}-label" #l
+        app: "{{ .Values.global.ms.name }}-label" #l
     spec:
       containers:
-        - name: "{{ .Values.ms.name }}-label" #l
+        - name: "{{ .Values.global.ms.name }}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
-          imagePullPolicy: {{ .Values.ms.container.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.global.ms.container.image.pullPolicy }}
           ports:
-            - name: {{ .Values.ms.container.name }}
-              containerPort: {{ .Values.ms.container.port }}
-              protocol: {{ .Values.ms.container.protocol }}
+            - name: {{ .Values.global.ms.container.name }}
+              containerPort: {{ .Values.global.ms.container.port }}
+              protocol: {{ .Values.global.ms.container.protocol }}
           env:
-          {{- range $key, $val := .Values.ms.container.envs }}
+          {{- range $key, $val := .Values.global.ms.container.envs }}
           - name: "{{ $key }}"
             valueFrom:
               secretKeyRef:
-                name: "{{ $.Values.ms.name }}-secret"
+                name: "{{ $.Values.global.ms.name }}-secret"
                 key: "{{ $key }}"
           {{- end }}
