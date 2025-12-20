@@ -1,33 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.microservice.name }}
-  name: "{{ .Values.microservice.name }}-deployment"
+  namespace: {{ .Values.ms.name }}
+  name: "{{ .Values.ms.name }}-deployment"
   labels:
-    app: "{{ .Values.microservice.name }}-label" #l
+    app: "{{ .Values.ms.name }}-label" #l
 spec:
-  replicas: {{ .Values.microservice.replicas }}
+  replicas: {{ .Values.ms.replicas }}
   selector:
     matchLabels:
-      app: "{{ .Values.microservice.name }}-label" #l
+      app: "{{ .Values.ms.name }}-label" #l
   template:
     metadata:
       labels:
-        app: "{{ .Values.microservice.name }}-label" #l
+        app: "{{ .Values.ms.name }}-label" #l
     spec:
       containers:
-        - name: "{{ .Values.microservice.name }}-label" #l
-          image:  {{ .Values.microservice.global.imgPath }}:{{ .Values.microservice.global.appVersion }}
-          imagePullPolicy: {{ .Values.microservice.container.image.pullPolicy }}
+        - name: "{{ .Values.ms.name }}-label" #l
+          image:  {{ .Values.ms.global.imgPath }}:{{ .Values.ms.global.appVersion }}
+          imagePullPolicy: {{ .Values.ms.container.image.pullPolicy }}
           ports:
-            - name: {{ .Values.microservice.container.name }}
-              containerPort: {{ .Values.microservice.container.port }}
-              protocol: {{ .Values.microservice.container.protocol }}
+            - name: {{ .Values.ms.container.name }}
+              containerPort: {{ .Values.ms.container.port }}
+              protocol: {{ .Values.ms.container.protocol }}
           env:
-          {{- range $key, $val := .Values.microservice.container.envs }}
+          {{- range $key, $val := .Values.ms.container.envs }}
           - name: "{{ $key }}"
             valueFrom:
               secretKeyRef:
-                name: "{{ $.Values.microservice.name }}-secret"
+                name: "{{ $.Values.ms.name }}-secret"
                 key: "{{ $key }}"
           {{- end }}
