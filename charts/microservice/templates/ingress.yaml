@@ -11,11 +11,15 @@ metadata:
     {{- end }}
 spec:
   ingressClassName: {{ .Values.container.gateway.ingressClass }} # O el nombre de tu clase (alb, nginx, etc)
-  {{- if .Values.container.gateway.tlsSecretName }}
+  {{- if .Values.container.gateway.tlsEnabled }}
   tls:
     - hosts:
       - {{ .Values.container.gateway.host | quote }}
-      secretName: {{ .Values.container.gateway.tlsSecretName | quote }}
+      {{- if .Values.container.gateway.tlsIsProduction}}
+      secretName: "{{ .Values.name }}-tls-prod-secret"
+      {{- else }}
+      secretName: "{{ .Values.name }}-tls-staging-secret"
+      {{- end }}
   {{- end }}
   rules:
     - host: {{ .Values.container.gateway.host | quote }}

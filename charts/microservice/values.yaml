@@ -52,7 +52,8 @@ container:
       request:
   gateway:
     annotations: {}
-    tlsSecretName:
+    tlsEnabled: false
+    tlsIsProduction: false
     ingressClass: nginx
     host: www.misitio.local
     contextBasePath: /
