@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.global.ms.name }}
+  name: "{{ .Values.global.ms.name }}-svc"
+spec:
+  type: ClusterIP   # Para Ingress, basta con ClusterIP (no necesitas NodePort)
+  selector:
+    app: "{{ .Values.global.ms.name }}-label" # <--- [A] CONECTA CON EL DEPLOYMENT (Misma etiqueta)
+  ports:
+    - port: {{ .Values.global.ms.container.port }}        # <--- [C] PUERTO DEL SERVICIO (Al que apuntará el Ingress)
+      targetPort: {{ .Values.global.ms.container.port }}  # Puerto del contenedor (Paso 1)

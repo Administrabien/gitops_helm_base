@@ -51,6 +51,11 @@ global:
         memory:
           limits:
           request:
+      gateway:
+        ingressClass: nginx
+        host: www.misitio.local
+        contextBasePath: /
+        pathType: Prefix
       envs:
         TZ: America/Santiago
         MANAGEMENT_CONTENT_PATH: actuator
