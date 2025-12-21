@@ -40,4 +40,14 @@ spec:
   {{- end }}
 status:
   observedGeneration: 1
+  lastScaleTime: <some-time>
+  currentReplicas: 1
+  desiredReplicas: 1
+  currentMetrics:
+    - type: Resource
+      resource:
+        name: cpu
+        current:
+          averageUtilization: 0
+          averageValue: 0
 {{- end }}
