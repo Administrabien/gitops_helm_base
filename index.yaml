@@ -166,6 +166,25 @@ entries:
   microservice:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-12-21T01:29:46.065598025Z"
+    description: Chart para crear todo lo de k8s referente a los microservicios
+    digest: a2c919fe4f7e9054212b76a2ce1996008d4a332562a2cda151e72794d2241cc9
+    keywords:
+    - ms
+    - microservice
+    - java
+    - nodejs
+    - base
+    maintainers:
+    - email: fcovillegast@gmail.com
+      name: Francisco
+    name: microservice
+    type: application
+    urls:
+    - https://github.com/Administrabien/gitops_helm_base/releases/download/microservice-0.4.7/microservice-0.4.7.tgz
+    version: 0.4.7
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-12-21T01:21:09.456227734Z"
     description: Chart para crear todo lo de k8s referente a los microservicios
     digest: d3611a39b360ba5269422c818f4ef2712c3d35f60323e01632189916c4106ee4
@@ -718,4 +737,4 @@ entries:
     urls:
     - https://github.com/Administrabien/gitops_helm_base/releases/download/microservice-0.1.10/microservice-0.1.10.tgz
     version: 0.1.10
-generated: "2025-12-21T01:21:09.456610378Z"
+generated: "2025-12-21T01:29:46.066162379Z"
