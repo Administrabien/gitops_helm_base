@@ -44,6 +44,13 @@ global:
         successThreshold: 1
         timeoutSeconds: 5
         failureThreshold: 5
+      resources:
+        cpu:
+          limits:
+          request:
+        memory:
+          limits:
+          request:
       envs:
         TZ: America/Santiago
         MANAGEMENT_CONTENT_PATH: actuator
