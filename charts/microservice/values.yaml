@@ -51,6 +51,8 @@ container:
       limits:
       request:
   gateway:
+    annotations: {}
+    tlsSecretName:
     ingressClass: nginx
     host: www.misitio.local
     contextBasePath: /

@@ -6,10 +6,19 @@ metadata:
   annotations:
     # Si usas NGINX Ingress Controller:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    {{- range $key, $val := .Values.container.gateway.annotations }}
+    {{ $key }}: {{ $val | quote }}
+    {{- end }}
 spec:
   ingressClassName: {{ .Values.container.gateway.ingressClass }} # O el nombre de tu clase (alb, nginx, etc)
+  {{- if .Values.container.gateway.tlsSecretName }}
+  tls:
+    - hosts:
+      - {{ .Values.container.gateway.host | quote }}
+      secretName: {{ .Values.container.gateway.tlsSecretName | quote }}
+  {{- end }}
   rules:
-    - host: {{ .Values.container.gateway.host }}
+    - host: {{ .Values.container.gateway.host | quote }}
       http:
         paths:
           - path: {{ .Values.container.gateway.contextBasePath }}
