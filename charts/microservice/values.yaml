@@ -2,71 +2,70 @@ global:
   appVersion: ""
   imgPath: ""
 
-  ms:
-    name: ""
-    replicas: 0
-    revisionsHistoryLimit: 0
-    serviceMetaData:
-      cluster: ""
-      service_name: ""
+name: ""
+replicas: 0
+revisionsHistoryLimit: 0
+serviceMetaData:
+  cluster: ""
+  service_name: ""
 
-    container:
-      port: 8080
-      protocol: TCP
-      name: http
-      path: /
-      image:
-        pullPolicy: Always
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 1000
-          runAsGroup: 1000
-      command: ["/bin/sh"]
-      args: []
-      livenessProbe:
-        path: actuator/health
-        initialDelaySeconds: 300
-        periodSeconds: 15
-        successThreshold: 1
-        timeoutSeconds: 5
-        failureThreshold: 5
-      readinessProbe:
-        path: actuator/health
-        initialDelaySeconds: 300
-        periodSeconds: 15
-        successThreshold: 1
-        timeoutSeconds: 5
-        failureThreshold: 5
-      startupProbe:
-        path: actuator/health
-        initialDelaySeconds: 300
-        periodSeconds: 15
-        successThreshold: 1
-        timeoutSeconds: 5
-        failureThreshold: 5
-      resources:
-        cpu:
-          limits:
-          request:
-        memory:
-          limits:
-          request:
-      gateway:
-        ingressClass: nginx
-        host: www.misitio.local
-        contextBasePath: /
-        pathType: Prefix
-      envs:
-        TZ: America/Santiago
-        MANAGEMENT_CONTENT_PATH: actuator
+container:
+  port: 8080
+  protocol: TCP
+  name: http
+  path: /
+  image:
+    pullPolicy: Always
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsUser: 1000
+      runAsGroup: 1000
+  command: ["/bin/sh"]
+  args: []
+  livenessProbe:
+    path: actuator/health
+    initialDelaySeconds: 300
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 5
+    failureThreshold: 5
+  readinessProbe:
+    path: actuator/health
+    initialDelaySeconds: 300
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 5
+    failureThreshold: 5
+  startupProbe:
+    path: actuator/health
+    initialDelaySeconds: 300
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 5
+    failureThreshold: 5
+  resources:
+    cpu:
+      limits:
+      request:
+    memory:
+      limits:
+      request:
+  gateway:
+    ingressClass: nginx
+    host: www.misitio.local
+    contextBasePath: /
+    pathType: Prefix
+  envs:
+    TZ: America/Santiago
+    MANAGEMENT_CONTENT_PATH: actuator
 
-      autoscaling:
-        enabled: true
-        version: "autoscaling/v2"
-        minReplicas: 1
-        maxReplicas: 5
-        targetCPUUtilizationPercentage: 90
-        targetMemoryUtilizationPercentage: 60
-        targetAverageRequests:
+  autoscaling:
+    enabled: true
+    version: "autoscaling/v2"
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 90
+    targetMemoryUtilizationPercentage: 60
+    targetAverageRequests:
 
-      tolerations: []
+  tolerations: []

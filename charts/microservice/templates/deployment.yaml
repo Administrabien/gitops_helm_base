@@ -1,40 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.global.ms.name }}
-  name: "{{ .Values.global.ms.name }}-deployment"
+  namespace: {{ .Values.name }}
+  name: "{{ .Values.name }}-deployment"
   labels:
-    app: "{{ .Values.global.ms.name }}-label" #l
+    app: "{{ .Values.name }}-label" #l
 spec:
-  replicas: {{ .Values.global.ms.replicas }}
-  revisionHistoryLimit: {{ .Values.global.ms.revisionsHistoryLimit }}
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: {{ .Values.revisionsHistoryLimit }}
   selector:
     matchLabels:
-      app: "{{ .Values.global.ms.name }}-label" #l
+      app: "{{ .Values.name }}-label" #l
   template:
     metadata:
       labels:
-        app: "{{ .Values.global.ms.name }}-label" #l
+        app: "{{ .Values.name }}-label" #l
     spec:
       containers:
-        - name: "{{ .Values.global.ms.name }}-label" #l
+        - name: "{{ .Values.name }}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
-          imagePullPolicy: {{ .Values.global.ms.container.image.pullPolicy }}
+          imagePullPolicy: {{ .Values.container.image.pullPolicy }}
           ports:
-            - name: {{ .Values.global.ms.container.name }}
-              containerPort: {{ .Values.global.ms.container.port }}
-              protocol: {{ .Values.global.ms.container.protocol }}
+            - name: {{ .Values.container.name }}
+              containerPort: {{ .Values.container.port }}
+              protocol: {{ .Values.container.protocol }}
           env:
-          {{- range $key, $val := .Values.global.ms.container.envs }}
+          {{- range $key, $val := .Values.container.envs }}
           - name: "{{ $key }}"
             valueFrom:
               secretKeyRef:
-                name: "{{ $.Values.global.ms.name }}-secret"
+                name: "{{ $.Values.name }}-secret"
                 key: "{{ $key }}"
           {{- end }}
-          {{- if .Values.global.ms.container.livenessProbe }}
+          {{- if .Values.container.livenessProbe }}
           livenessProbe:
-            {{- range $key, $value := .Values.global.ms.container.livenessProbe }}
+            {{- range $key, $value := .Values.container.livenessProbe }}
             {{- if eq $key "path" }}
             httpGet:
               path: {{ $value }}
@@ -45,9 +45,9 @@ spec:
             {{- end }}
             {{- end }}
           {{- end}}
-          {{- if .Values.global.ms.container.readinessProbe }}
+          {{- if .Values.container.readinessProbe }}
           readinessProbe:
-            {{- range $key, $value := .Values.global.ms.container.readinessProbe }}
+            {{- range $key, $value := .Values.container.readinessProbe }}
             {{- if eq $key "path" }}
             httpGet:
               path: {{ $value }}
@@ -58,9 +58,9 @@ spec:
             {{- end }}
             {{- end }}
           {{- end}}
-          {{- if .Values.global.ms.container.startupProbe }}
+          {{- if .Values.container.startupProbe }}
           startupProbe:
-            {{- range $key, $value := .Values.global.ms.container.startupProbe }}
+            {{- range $key, $value := .Values.container.startupProbe }}
             {{- if eq $key "path" }}
             httpGet:
               path: {{ $value }}
@@ -71,7 +71,7 @@ spec:
             {{- end }}
             {{- end }}
           {{- end}}
-          {{- with .Values.global.ms.container.resources }}
+          {{- with .Values.container.resources }}
           {{- /* Validamos si existe al menos un valor para pintar la sección 'resources' */ -}}
           {{- if or (or .memory.requests .memory.limits) (or .cpu.requests .cpu.limits) }}
           resources:

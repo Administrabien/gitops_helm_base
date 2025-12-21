@@ -1,21 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: {{ .Values.global.ms.name }}
-  name: "{{ .Values.global.ms.name }}-ingress"
+  namespace: {{ .Values.name }}
+  name: "{{ .Values.name }}-ingress"
   annotations:
     # Si usas NGINX Ingress Controller:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: {{ .Values.global.ms.container.gateway.ingressClass }} # O el nombre de tu clase (alb, nginx, etc)
+  ingressClassName: {{ .Values.container.gateway.ingressClass }} # O el nombre de tu clase (alb, nginx, etc)
   rules:
-    - host: {{ .Values.global.ms.container.gateway.host }}
+    - host: {{ .Values.container.gateway.host }}
       http:
         paths:
-          - path: {{ .Values.global.ms.container.gateway.contextBasePath }}
-            pathType: {{ .Values.global.ms.container.gateway.pathType }}
+          - path: {{ .Values.container.gateway.contextBasePath }}
+            pathType: {{ .Values.container.gateway.pathType }}
             backend:
               service:
-                name: "{{ .Values.global.ms.name }}-svc" # <--- [B] TIENE QUE SER EL NOMBRE DEL SERVICE
+                name: "{{ .Values.name }}-svc" # <--- [B] TIENE QUE SER EL NOMBRE DEL SERVICE
                 port:
-                  number: {{ .Values.global.ms.container.port }}     # <--- [C] TIENE QUE SER EL 'port' DEL SERVICE
+                  number: {{ .Values.container.port }}     # <--- [C] TIENE QUE SER EL 'port' DEL SERVICE
