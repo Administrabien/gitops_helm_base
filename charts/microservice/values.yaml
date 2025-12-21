@@ -59,12 +59,12 @@ container:
     TZ: America/Santiago
     MANAGEMENT_CONTENT_PATH: actuator
 
-  autoscaling:
-    enabled: false
-    minReplicas: 1
-    maxReplicas: 5
-    targetCPUUtilizationPercentage: 50
-    targetMemoryUtilizationPercentage: 50
-    targetRequestsPerSecond: 3
-
   tolerations: []
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
+  targetMemoryUtilizationPercentage: 50
+  targetRequestsPerSecond: 3
