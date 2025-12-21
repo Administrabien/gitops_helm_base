@@ -34,18 +34,39 @@ spec:
           {{- if .Values.global.ms.container.livenessProbe }}
           livenessProbe:
             {{- range $key, $value := .Values.global.ms.container.livenessProbe }}
+            {{- if eq $key "path" }}
+            httpGet:
+              path: {{ $value }}
+              port: http
+              scheme: HTTP
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
           {{- end}}
           {{- if .Values.global.ms.container.readinessProbe }}
           readinessProbe:
             {{- range $key, $value := .Values.global.ms.container.readinessProbe }}
+            {{- if eq $key "path" }}
+            httpGet:
+              path: {{ $value }}
+              port: http
+              scheme: HTTP
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
           {{- end}}
           {{- if .Values.global.ms.container.startupProbe }}
           startupProbe:
             {{- range $key, $value := .Values.global.ms.container.startupProbe }}
+            {{- if eq $key "path" }}
+            httpGet:
+              path: {{ $value }}
+              port: http
+              scheme: HTTP
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
           {{- end}}
