@@ -64,8 +64,8 @@ container:
     version: "autoscaling/v2"
     minReplicas: 1
     maxReplicas: 5
-    targetCPUUtilizationPercentage: 90
-    targetMemoryUtilizationPercentage: 60
-    targetAverageRequests:
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+    targetRequestsPerSecond: 3
 
   tolerations: []

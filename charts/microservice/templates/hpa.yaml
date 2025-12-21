@@ -1,0 +1,43 @@
+{{ if .Values.container.autoscaling.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: {{ .Values.name }}
+  name: "{{ .Values.name }}-hpa"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: "{{ .Values.name }}-hpa"
+  minReplicas: {{ .Values.container.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.container.autoscaling.maxReplicas }}
+  {{ if .Values.container.autoscaling.targetCPUUtilizationPercentage }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.container.autoscaling.targetCPUUtilizationPercentage }}
+  {{- end }}
+  {{ if .Values.container.autoscaling.targetMemoryUtilizationPercentage }}
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.container.autoscaling.targetMemoryUtilizationPercentage }}
+  {{- end }}
+  {{ if .Values.container.autoscaling.targetRequestsPerSecond }}
+    - type: Pods
+      pods:
+        metric:
+          name: http_requests_per_second
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.container.autoscaling.targetRequestsPerSecond }}
+  {{- end }}
+status:
+  observedGeneration: 1
+{{- end }}
