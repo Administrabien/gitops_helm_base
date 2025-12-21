@@ -72,25 +72,26 @@ spec:
             {{- end }}
           {{- end}}
           {{- with .Values.global.ms.container.resources }}
-          {{- if .memory.request or .memory.limits or .cpu.request or .cpu.limits }}
+          {{- /* Validamos si existe al menos un valor para pintar la sección 'resources' */ -}}
+          {{- if or (or .memory.requests .memory.limits) (or .cpu.requests .cpu.limits) }}
           resources:
-            {{- if .memory.request or .cpu.request }}
+              {{- if or .memory.requests .cpu.requests }}
             requests:
-              {{- if .memory.request }}
-              memory: {{ .memory.request | quote }}
+                {{- if .memory.requests }}
+              memory: {{ .memory.requests | quote }}
+                {{- end }}
+                {{- if .cpu.requests }}
+              cpu: {{ .cpu.requests | quote }}
+                {{- end }}
               {{- end }}
-              {{- if .cpu.request }}
-              cpu: {{ .cpu.request | quote }}
-              {{- end}}
-            {{- end }}
-            {{- if .memory.limits or .cpu.limits }}
+              {{- if or .memory.limits .cpu.limits }}
             limits:
-              {{- if .memory.limits }}
+                {{- if .memory.limits }}
               memory: {{ .memory.limits | quote }}
-              {{- end }}
-              {{- if .cpu.limits }}
+                {{- end }}
+                {{- if .cpu.limits }}
               cpu: {{ .cpu.limits | quote }}
-              {{- end}}
+                {{- end }}
+              {{- end }}
             {{- end }}
-          {{- end }}
           {{- end }}
