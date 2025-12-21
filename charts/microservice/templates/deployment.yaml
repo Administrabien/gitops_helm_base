@@ -7,6 +7,7 @@ metadata:
     app: "{{ .Values.global.ms.name }}-label" #l
 spec:
   replicas: {{ .Values.global.ms.replicas }}
+  revisionHistoryLimit: {{ .Values.global.ms.revisionsHistoryLimit }}
   selector:
     matchLabels:
       app: "{{ .Values.global.ms.name }}-label" #l

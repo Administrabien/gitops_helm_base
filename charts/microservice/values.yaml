@@ -5,7 +5,7 @@ global:
   ms:
     name: ""
     replicas: 0
-
+    revisionsHistoryLimit: 0
     serviceMetaData:
       cluster: ""
       service_name: ""
