@@ -60,8 +60,7 @@ container:
     MANAGEMENT_CONTENT_PATH: actuator
 
   autoscaling:
-    enabled: true
-    version: "autoscaling/v2"
+    enabled: false
     minReplicas: 1
     maxReplicas: 5
     targetCPUUtilizationPercentage: 50
