@@ -72,7 +72,7 @@ spec:
             {{- end }}
           {{- end}}
           {{- with .Values.global.ms.container.resources }}
-          {{- if .memory.request or .cpu.request or .memory.limits or .cpu.limits }}
+          {{- if .memory.request or .memory.limits or .cpu.request or .cpu.limits }}
           resources:
             {{- if .memory.request or .cpu.request }}
             requests:
