@@ -9,34 +9,34 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: "{{ .Values.name }}-hpa"
-  minReplicas: {{ .Values.container.autoscaling.minReplicas }}
-  maxReplicas: {{ .Values.container.autoscaling.maxReplicas }}
-  {{ if .Values.container.autoscaling.targetCPUUtilizationPercentage }}
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  {{ if .Values.autoscaling.targetCPUUtilizationPercentage }}
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: {{ .Values.container.autoscaling.targetCPUUtilizationPercentage }}
+          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
   {{- end }}
-  {{ if .Values.container.autoscaling.targetMemoryUtilizationPercentage }}
+  {{ if .Values.autoscaling.targetMemoryUtilizationPercentage }}
   metrics:
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: {{ .Values.container.autoscaling.targetMemoryUtilizationPercentage }}
+          averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
   {{- end }}
-  {{ if .Values.container.autoscaling.targetRequestsPerSecond }}
+  {{ if .Values.autoscaling.targetRequestsPerSecond }}
     - type: Pods
       pods:
         metric:
           name: http_requests_per_second
         target:
           type: AverageValue
-          averageValue: {{ .Values.container.autoscaling.targetRequestsPerSecond }}
+          averageValue: {{ .Values.autoscaling.targetRequestsPerSecond }}
   {{- end }}
 status:
   observedGeneration: 1
