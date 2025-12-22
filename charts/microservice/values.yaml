@@ -13,6 +13,13 @@ serviceMetaData:
 istioEnabled: false
 canaryEnabled: false
 
+virtualService:
+  hosts: [
+    "administrabien.cl"
+  ]
+  selectorIstio: "ingressgateway"
+  uriPrefix: /
+
 container:
   port: 8080
   protocol: TCP
