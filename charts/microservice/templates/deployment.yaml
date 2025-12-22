@@ -15,6 +15,12 @@ spec:
     metadata:
       labels:
         app: "{{ .Values.name }}-label" #l
+        {{- if.Values.istioEnabled }}
+        sidecar.istio.io/inject: "true"
+        {{- end }}
+        {{- if.Values.canaryEnabled }}
+        istio.io/rev: canary
+        {{- end }}
     spec:
       containers:
         - name: "{{ .Values.name }}-label" #l

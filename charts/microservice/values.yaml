@@ -5,9 +5,13 @@ global:
 name: ""
 replicas: 0
 revisionsHistoryLimit: 0
+
 serviceMetaData:
   cluster: ""
   service_name: ""
+
+istioEnabled: false
+canaryEnabled: false
 
 container:
   port: 8080
