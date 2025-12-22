@@ -16,6 +16,6 @@ spec:
           prefix: {{ .Values.virtualService.uriPrefix }}
       route:
         - destination:
-            host: "{{ .Values.name }}-svc"
+            host: "{{ .Values.name }}.{{ .Values.name }}.svc.cluster.local"
             port:
               number: 80
