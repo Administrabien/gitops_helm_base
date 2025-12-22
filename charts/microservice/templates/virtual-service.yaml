@@ -1,14 +1,13 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: mi-frontend-vs
+  namespace: {{ .Values.name }}
+  name: "{{ .Values.name }}-virtualservice"
 spec:
   hosts:
-    {{- range .Values.virtualService.hosts }}
-    - {{ . }}
-    {{- end }}
+    - "bookinfo.com"
   gateways:
-    - "{{ .Values.name }}-gateway"
+    - mygateway
   http:
     - match:
       - uri:
