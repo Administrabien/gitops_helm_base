@@ -5,9 +5,11 @@ metadata:
   name: "{{ .Values.name }}-virtualservice"
 spec:
   hosts:
-    - "bookinfo.com"
+    {{- range .Values.virtualService.hosts }}
+    - {{ . }}
+    {{- end }}
   gateways:
-    - mygateway
+    - "{{ .Values.name }}-gateway"
   http:
     - match:
       - uri:
