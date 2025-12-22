@@ -11,9 +11,9 @@ spec:
   http:
     - match:
       - uri:
-        prefix: {{ .Values.virtualService.uriPrefix }}
+          prefix: {{ .Values.virtualService.uriPrefix }}
       route:
         - destination:
-          host: "{{ .Values.name }}-svc"
-          port:
-            number: 80
+            host: "{{ .Values.name }}-svc"
+            port:
+              number: 80
