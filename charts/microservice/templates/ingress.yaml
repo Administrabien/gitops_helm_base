@@ -6,6 +6,11 @@ metadata:
   annotations:
     # Si usas NGINX Ingress Controller:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    {{- if .Values.container.gateway.tlsIsProduction}}
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    {{- else }}
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    {{- end }}
     {{- range $key, $val := .Values.container.gateway.annotations }}
     {{ $key }}: {{ $val | quote }}
     {{- end }}
