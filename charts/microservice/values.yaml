@@ -2,23 +2,17 @@ global:
   appVersion: ""
   imgPath: ""
 
-name: ""
-replicas: 0
-revisionsHistoryLimit: 0
+
+name:
+replicas:
+revisionHistoryLimit:
 
 serviceMetaData:
-  cluster: ""
-  service_name: ""
+  cluster:
+  service_name:
 
 istioEnabled: false
 canaryEnabled: false
-
-virtualService:
-  hosts: [
-    "administrabien.cl"
-  ]
-  selectorIstio: "ingressgateway"
-  uriPrefix: /
 
 container:
   port: 8080
@@ -62,16 +56,22 @@ container:
       limits:
       request:
   gateway:
+    enabled: false
     annotations: {}
     tlsEnabled: false
     tlsIsProduction: false
-    ingressClass: nginx
-    host: www.misitio.local
+    ingressClass: "nginx"
+    host: "administrabien.cl"
     contextBasePath: /
-    pathType: Prefix
+    pathType: "prefix"
+  virtualService:
+    enabled: false
+    hosts: [
+      "administrabien.cl"
+    ]
+    gateway:
+    uriPrefix: /
   envs:
-    TZ: America/Santiago
-    MANAGEMENT_CONTENT_PATH: actuator
 
   tolerations: []
 

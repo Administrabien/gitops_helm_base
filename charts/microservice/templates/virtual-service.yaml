@@ -1,3 +1,4 @@
+{{- if .Values.container.virtualService.enabled }}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -5,17 +6,18 @@ metadata:
   name: "{{ .Values.name }}-virtualservice"
 spec:
   hosts:
-    {{- range .Values.virtualService.hosts }}
+    {{- range .Values.container.virtualService.hosts }}
     - {{ . }}
     {{- end }}
   gateways:
-    - "{{ .Values.name }}-gateway"
+    - {{ .Values.container.virtualService.gateway }}
   http:
     - match:
       - uri:
-          prefix: {{ .Values.virtualService.uriPrefix }}
+          prefix: {{ .Values.container.virtualService.uriPrefix }}
       route:
         - destination:
-            host: "{{ .Values.name }}-svc"
+            host: "{{ .Values.name }}-svc.{{ .Values.name }}.svc.cluster.local"
             port:
-              number: 80
+              number: {{ .Values.container.port }}
+{{- end }}

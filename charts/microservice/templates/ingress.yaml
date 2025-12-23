@@ -1,3 +1,4 @@
+{{- if .Values.container.gateway.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -37,3 +38,4 @@ spec:
                 name: "{{ .Values.name }}-svc" # <--- [B] TIENE QUE SER EL NOMBRE DEL SERVICE
                 port:
                   number: {{ .Values.container.port }}     # <--- [C] TIENE QUE SER EL 'port' DEL SERVICE
+{{- end }}
