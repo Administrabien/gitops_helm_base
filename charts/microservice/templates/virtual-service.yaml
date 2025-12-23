@@ -15,6 +15,10 @@ spec:
     - match:
       - uri:
           prefix: {{ .Values.container.virtualService.uriPrefix }}
+      {{- if .Values.container.virtualService.uriReWrite }}
+      rewrite:
+        uri: {{ .Values.container.virtualService.uriReWrite | quote }}
+      {{- end }}
       route:
         - destination:
             host: "{{ .Values.name }}-svc.{{ .Values.name }}.svc.cluster.local"

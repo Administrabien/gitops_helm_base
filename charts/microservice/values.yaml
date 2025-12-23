@@ -71,6 +71,7 @@ container:
     ]
     gateway:
     uriPrefix: /
+    uriReWrite:
   envs:
 
   tolerations: []
