@@ -21,7 +21,6 @@ spec:
           averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
   {{- end }}
   {{ if .Values.autoscaling.targetMemoryUtilizationPercentage }}
-  metrics:
     - type: Resource
       resource:
         name: memory
