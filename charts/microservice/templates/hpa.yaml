@@ -11,8 +11,9 @@ spec:
     name: "{{ .Values.name }}-deployment"
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
-  {{ if .Values.autoscaling.targetCPUUtilizationPercentage }}
   metrics:
+  {{- if and .Values.container.resources.cpu.limits  .Values.container.resources.cpu.request }}
+  {{- if .Values.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
       resource:
         name: cpu
@@ -20,7 +21,9 @@ spec:
           type: Utilization
           averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
   {{- end }}
-  {{ if .Values.autoscaling.targetMemoryUtilizationPercentage }}
+  {{- end }}
+  {{- if and .Values.container.resources.memory.limits  .Values.container.resources.memory.request }}
+  {{- if .Values.autoscaling.targetMemoryUtilizationPercentage }}
     - type: Resource
       resource:
         name: memory
@@ -28,13 +31,32 @@ spec:
           type: Utilization
           averageUtilization: {{ .Values.autoscaling.targetMemoryUtilizationPercentage }}
   {{- end }}
-  {{ if .Values.autoscaling.targetRequestsPerSecond }}
-    - type: Pods
-      pods:
+  {{- end }}
+
+  {{- if .Values.autoscaling.averageRequestPerSeconds }}
+    - type: Object
+      object:
+        describedObject:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: "{{ .Values.name }}-deployment"
         metric:
-          name: http_requests_per_second
+          name: istio_requests_per_second
         target:
-          type: AverageValue
-          averageValue: {{ .Values.autoscaling.targetRequestsPerSecond }}
+          type: Value
+          value: {{ .Values.autoscaling.averageRequestPerSeconds }}
   {{- end }}
 {{- end }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300 # Espera 5 minutos antes de empezar a borrar pods
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 0 # Escala hacia arriba inmediatamente
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15

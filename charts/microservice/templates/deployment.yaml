@@ -21,15 +21,19 @@ spec:
         {{- if.Values.canaryEnabled }}
         istio.io/rev: canary
         {{- end }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "15020"
+        prometheus.io/path: "/stats/prometheus"
     spec:
       containers:
         - name: "{{ .Values.name }}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
           imagePullPolicy: {{ .Values.container.image.pullPolicy }}
           ports:
-            - name: {{ .Values.container.name }}
+            - name: http
               containerPort: {{ .Values.container.port }}
-              protocol: {{ .Values.container.protocol }}
+              protocol: TCP
           env:
           {{- range $key, $val := .Values.container.envs }}
           - name: "{{ $key }}"

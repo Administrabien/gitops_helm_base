@@ -10,3 +10,4 @@ spec:
   ports:
     - port: {{ .Values.container.port }}        # <--- [C] PUERTO DEL SERVICIO (Al que apuntará el Ingress)
       targetPort: {{ .Values.container.port }}  # Puerto del contenedor (Paso 1)
+      name: http

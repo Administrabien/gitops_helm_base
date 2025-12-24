@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ .Values.name }}-pod-monitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      # Usamos la etiqueta que identifica a tus pods
+      app: {{ .Values.name }}-label
+  namespaceSelector:
+    matchNames:
+      - {{ .Values.name }}
+  podMetricsEndpoints:
+    - port: http-envoy-prom # Nombre del puerto en el contenedor istio-proxy
+      path: /stats/prometheus
+      interval: 15s

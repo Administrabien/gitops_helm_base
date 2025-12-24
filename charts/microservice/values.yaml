@@ -16,8 +16,6 @@ canaryEnabled: false
 
 container:
   port: 8080
-  protocol: TCP
-  name: http
   path: /
   image:
     pullPolicy: Always
@@ -82,4 +80,4 @@ autoscaling:
   maxReplicas: 5
   targetCPUUtilizationPercentage: 50
   targetMemoryUtilizationPercentage: 50
-  targetRequestsPerSecond: 3
+  averageRequestPerSeconds: 3000m
