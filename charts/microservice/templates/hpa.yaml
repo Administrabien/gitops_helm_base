@@ -57,6 +57,9 @@ spec:
     scaleUp:
       stabilizationWindowSeconds: 0 # Escala hacia arriba inmediatamente
       policies:
+        - type: Pods
+          value: 2       # Permiso para añadir 2 pods cada 15 segundos
+          periodSeconds: 5
         - type: Percent
           value: 100
           periodSeconds: 15
