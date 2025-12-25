@@ -26,6 +26,8 @@ spec:
         prometheus.io/port: "15020"
         prometheus.io/path: "/stats/prometheus"
     spec:
+      imagePullSecrets:
+        - name: "{{ .Values.name }}-image-pull-secret"
       containers:
         - name: "{{ .Values.name }}-label" #l
           image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
