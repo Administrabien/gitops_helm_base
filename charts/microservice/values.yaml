@@ -70,6 +70,7 @@ container:
     gateway:
     uriPrefix: /
     uriReWrite:
+  autoMountSAToken: false
   envs:
 
   tolerations: []
