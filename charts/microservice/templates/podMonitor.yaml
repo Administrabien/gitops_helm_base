@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: {{ .Values.name }}-pod-monitor
-  namespace: monitoring
+  namespace: {{ .Values.name }}
   labels:
     release: monitoring
 spec:

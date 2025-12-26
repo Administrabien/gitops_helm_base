@@ -84,16 +84,15 @@ spec:
             {{- end }}
           {{- end}}
           {{- with .Values.container.resources }}
-          {{- /* Validamos si existe al menos un valor para pintar la sección 'resources' */ -}}
-          {{- if or (or .memory.requests .memory.limits) (or .cpu.requests .cpu.limits) }}
+          {{- if or (or .memory.request .memory.limits) (or .cpu.request .cpu.limits) }}
           resources:
-              {{- if or .memory.requests .cpu.requests }}
+              {{- if or .memory.request .cpu.request }}
             requests:
-                {{- if .memory.requests }}
-              memory: {{ .memory.requests | quote }}
+                {{- if .memory.request }}
+              memory: {{ .memory.request | quote }}
                 {{- end }}
-                {{- if .cpu.requests }}
-              cpu: {{ .cpu.requests | quote }}
+                {{- if .cpu.request }}
+              cpu: {{ .cpu.request | quote }}
                 {{- end }}
               {{- end }}
               {{- if or .memory.limits .cpu.limits }}
