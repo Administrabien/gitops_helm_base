@@ -107,4 +107,4 @@ spec:
             {{- end }}
           {{- end }}
       serviceAccountName:  {{ .Values.name}}-sa
-      automountServiceAccountToken: {{ .Values.container.autoMountSAToken }}
+      automountServiceAccountToken: {{ .Values.container.sa.autoMountSAToken }}

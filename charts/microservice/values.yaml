@@ -64,13 +64,13 @@ container:
     pathType: "prefix"
   virtualService:
     enabled: false
-    hosts: [
-      "administrabien.cl"
-    ]
+    hosts: []
     gateway:
     uriPrefix: /
     uriReWrite:
-  autoMountSAToken: false
+  sa:
+    autoMountSAToken: false
+    enforceMountableSecrets: false
   envs:
 
   tolerations: []
@@ -78,7 +78,7 @@ container:
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 50
-  targetMemoryUtilizationPercentage: 50
-  averageRequestPerSeconds: 3000m
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 95
+  targetMemoryUtilizationPercentage: 95
+  averageRequestPerSeconds: 1000m
