@@ -5,6 +5,8 @@ metadata:
   name: "{{ .Values.name }}-deployment"
   labels:
     app: "{{ .Values.name }}-label" #l
+  annotations:
+    appVersion: {{ .Values.global.appVersion | quote }}
 spec:
   replicas: {{ .Values.replicas }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
@@ -30,12 +32,20 @@ spec:
         - name: "{{ .Values.name }}-image-pull-secret"
       containers:
         - name: "{{ .Values.name }}-label" #l
-          image:  {{ .Values.global.imgPath }}:{{ .Values.global.appVersion }}
+          image: {{ printf "%s:%s" .Values.global.imgPath .Values.global.appVersion | quote }}
           imagePullPolicy: {{ .Values.container.image.pullPolicy }}
           ports:
             - name: http
               containerPort: {{ .Values.container.port }}
               protocol: TCP
+          {{- if .Values.container.command }}
+          command:
+            {{- toYaml .Values.container.command | nindent 12 }}
+          {{- end }}
+          {{- if .Values.container.args }}
+          args:
+            {{- toYaml .Values.container.args | nindent 12 }}
+          {{- end }}
           env:
           {{- range $key, $val := .Values.container.envs }}
           - name: "{{ $key }}"
@@ -53,7 +63,15 @@ spec:
               port: http
               scheme: HTTP
             {{- else }}
+            {{- if eq $key "exec" }}
+            exec:
+              {{- if $.Values.container.livenessProbe.exec.command }}
+              command:
+                {{- toYaml $.Values.container.livenessProbe.exec.command | nindent 16 }}
+              {{- end }}
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
             {{- end }}
           {{- end}}
@@ -66,7 +84,15 @@ spec:
               port: http
               scheme: HTTP
             {{- else }}
+            {{- if eq $key "exec" }}
+            exec:
+              {{- if $.Values.container.readinessProbe.exec.command }}
+              command:
+                {{- toYaml $.Values.container.readinessProbe.exec.command | nindent 16 }}
+              {{- end }}
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
             {{- end }}
           {{- end}}
@@ -79,7 +105,15 @@ spec:
               port: http
               scheme: HTTP
             {{- else }}
+            {{- if eq $key "exec" }}
+            exec:
+              {{- if $.Values.container.startupProbe.exec.command }}
+              command:
+                {{- toYaml $.Values.container.startupProbe.exec.command | nindent 16 }}
+              {{- end }}
+            {{- else }}
             {{ $key }}: {{ $value }}
+            {{- end }}
             {{- end }}
             {{- end }}
           {{- end}}

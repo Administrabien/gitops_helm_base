@@ -5,3 +5,7 @@ metadata:
     kubernetes.io/enforce-mountable-secrets: "{{ .Values.container.sa.enforceMountableSecrets }}"
   name: {{ .Values.name  }}-sa
   namespace: {{ .Values.name }}
+secrets:
+  - name: {{ .Values.name }}-secret
+imagePullSecrets:
+  - name: {{ .Values.name }}-image-pull-secret
