@@ -142,3 +142,17 @@ spec:
           {{- end }}
       serviceAccountName:  {{ .Values.name}}-sa
       automountServiceAccountToken: {{ .Values.container.sa.autoMountSAToken }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
+
+      {{- with .Values.tolerations }}
+      tolerations:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
