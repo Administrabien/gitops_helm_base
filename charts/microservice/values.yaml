@@ -71,6 +71,8 @@ container:
   sa:
     autoMountSAToken: false
     enforceMountableSecrets: false
+    name:
+  vaultRoleName:
   envs:
 
 tolerations: {}
