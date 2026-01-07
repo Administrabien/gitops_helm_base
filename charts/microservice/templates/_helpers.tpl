@@ -1,4 +1,4 @@
-{{- define "base.envs" -}}
+{{- define "common.envs" -}}
 -SPRING_CLOUD_VAULT_URI: "http://vault.vault.svc.cluster.local:8200"
 -SPRING_CLOUD_VAULT_AUTHENTICATION: "KUBERNETES"
 -SPRING_CLOUD_VAULT_KUBERNETES_ROLE: "{{ .Values.container.vaultRoleName }}"

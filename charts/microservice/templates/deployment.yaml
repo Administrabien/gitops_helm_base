@@ -47,7 +47,7 @@ spec:
             {{- toYaml .Values.container.args | nindent 12 }}
           {{- end }}
           env:
-          {{- range $key, $val := base.envs }}
+          {{- range $key, $val := common.envs }}
           - name: "{{ $key }}"
             valueFrom:
               secretKeyRef:
