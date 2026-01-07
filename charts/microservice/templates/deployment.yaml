@@ -46,14 +46,9 @@ spec:
           args:
             {{- toYaml .Values.container.args | nindent 12 }}
           {{- end }}
-          env:
-          {{- range $key, $val := common.envs }}
-          - name: "{{ $key }}"
-            valueFrom:
-              secretKeyRef:
-                name: "{{ $.Values.name }}-secret"
-                key: "{{ $key }}"
-          {{- end }}
+          envFrom:
+            - secretRef:
+                name: "{{ .Values.name }}-secret"
           {{- if .Values.container.livenessProbe }}
           livenessProbe:
             {{- range $key, $value := .Values.container.livenessProbe }}
