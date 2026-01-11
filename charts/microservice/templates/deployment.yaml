@@ -50,6 +50,12 @@ spec:
             - secretRef:
                 name: "{{ .Values.name }}-secret"
           {{- if .Values.container.livenessProbe }}
+          volumeMounts:
+            {{- if .Values.container.allowNginxEnvVars }}
+            - name: env-config-vol
+              mountPath: /usr/share/nginx/html/env-config.js
+              subPath: env-config.js
+            {{- end }}
           livenessProbe:
             {{- range $key, $value := .Values.container.livenessProbe }}
             {{- if eq $key "path" }}
@@ -135,6 +141,12 @@ spec:
               {{- end }}
             {{- end }}
           {{- end }}
+      volumes:
+        {{- if .Values.container.allowNginxEnvVars }}
+        - name: env-config-vol
+          configMap:
+            name: {{ .Values.name }}-env-config
+        {{- end }}
       serviceAccountName:  {{ .Values.name}}-sa
       automountServiceAccountToken: {{ .Values.container.sa.autoMountSAToken }}
       {{- with .Values.nodeSelector }}

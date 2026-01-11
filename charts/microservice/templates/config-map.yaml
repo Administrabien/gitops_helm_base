@@ -1,0 +1,13 @@
+{{- if .Values.container.allowNginxEnvVars }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}-env-config
+data:
+  env-config.js: |
+    window._env_ = {
+      {{- range $key, $val := .Values.container.envs }}
+      {{ $key }}: {{ $val | quote }},
+      {{- end }}
+    }
+{{- end }}
