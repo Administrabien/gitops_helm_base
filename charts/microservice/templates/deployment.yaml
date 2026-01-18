@@ -30,6 +30,9 @@ spec:
         {{- if .Values.configmap.enabled }}
         checksum/config: {{ .Values.configmap.applicationProperties | default "" | sha256sum }}
         {{- end }}
+        {{- if .Values.configmap.enabled }}
+        checksum/config: {{ .envs | default "" | sha256sum }}
+        {{- end }}
     spec:
       imagePullSecrets:
         - name: "{{ .Values.name }}-image-pull-secret"
