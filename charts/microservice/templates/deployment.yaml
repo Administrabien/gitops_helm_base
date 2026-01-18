@@ -27,6 +27,9 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "15020"
         prometheus.io/path: "/stats/prometheus"
+        {{- if .Values.configmap.enabled }}
+        checksum/config: {{ .Values.configmap.applicationProperties | default "" | sha256sum }}
+        {{- end }}
     spec:
       imagePullSecrets:
         - name: "{{ .Values.name }}-image-pull-secret"

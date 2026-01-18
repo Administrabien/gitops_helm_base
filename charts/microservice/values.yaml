@@ -89,4 +89,4 @@ autoscaling:
 
 configmap:
   enabled: false
-  applicationProperties: {}
+  applicationProperties: ""
