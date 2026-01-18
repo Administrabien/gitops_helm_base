@@ -9,6 +9,6 @@ SPRING_CLOUD_VAULT_ENABLED: "true"
 {{ $key }}: {{ $val | quote }}
 {{- end }}
 {{- if .Values.configmap.enabled }}
-SPRING_CONFIG_ADDITIONAL_LOCATION: "/opt/administrabien/config/application.properties"
+SPRING_CONFIG_ADDITIONAL_LOCATION: "file:/opt/administrabien/config/application.properties"
 {{- end }}
 {{- end -}}
