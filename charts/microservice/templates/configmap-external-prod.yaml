@@ -6,5 +6,5 @@ metadata:
 data:
   # Opción A: Si quieres que el archivo properties sea una sola entrada (típico en Spring Boot)
   application.properties: |
-    {{- .Values.applicationProperties | nindent 4 }}
+    {{- .Values.configmap.applicationProperties | default "" | nindent 4 }}
 {{- end }}
