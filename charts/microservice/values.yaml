@@ -86,3 +86,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 95
   targetMemoryUtilizationPercentage: 95
   averageRequestPerSeconds: 1000m
+
+configmap:
+  enabled: false
+  applicationProperties: {}

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.name }}-env-config
+  name: nginx-configmap
 data:
   env-config.js: |
     window._env_ = {
